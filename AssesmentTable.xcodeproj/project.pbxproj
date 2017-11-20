@@ -10,14 +10,12 @@
 		669698ED1FB1964B0054AFC2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669698EC1FB1964B0054AFC2 /* AppDelegate.swift */; };
 		669698EF1FB1964B0054AFC2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669698EE1FB1964B0054AFC2 /* ViewController.swift */; };
 		669698F21FB1964C0054AFC2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 669698F01FB1964C0054AFC2 /* Main.storyboard */; };
-		669698F51FB1964C0054AFC2 /* AssesmentTable.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 669698F31FB1964C0054AFC2 /* AssesmentTable.xcdatamodeld */; };
 		669698F71FB1964C0054AFC2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 669698F61FB1964C0054AFC2 /* Assets.xcassets */; };
 		669698FA1FB1964C0054AFC2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 669698F81FB1964C0054AFC2 /* LaunchScreen.storyboard */; };
 		66CFD4C91FC2AE0000F88AA5 /* AssesmentCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66CFD4C51FC2AE0000F88AA5 /* AssesmentCollectionView.swift */; };
 		66CFD4CA1FC2AE0000F88AA5 /* AssesmentCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66CFD4C61FC2AE0000F88AA5 /* AssesmentCollectionCell.swift */; };
 		66CFD4CB1FC2AE0000F88AA5 /* AssesmentCollecionLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66CFD4C71FC2AE0000F88AA5 /* AssesmentCollecionLayout.swift */; };
 		66CFD4CC1FC2AE0000F88AA5 /* AssesmentCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 66CFD4C81FC2AE0000F88AA5 /* AssesmentCollectionCell.xib */; };
-		66CFD4D01FC2AE7D00F88AA5 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 66CFD4CF1FC2AE7D00F88AA5 /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,7 +23,6 @@
 		669698EC1FB1964B0054AFC2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		669698EE1FB1964B0054AFC2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		669698F11FB1964C0054AFC2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		669698F41FB1964C0054AFC2 /* AssesmentTable.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AssesmentTable.xcdatamodel; sourceTree = "<group>"; };
 		669698F61FB1964C0054AFC2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		669698F91FB1964C0054AFC2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		669698FB1FB1964C0054AFC2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -33,7 +30,6 @@
 		66CFD4C61FC2AE0000F88AA5 /* AssesmentCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssesmentCollectionCell.swift; sourceTree = "<group>"; };
 		66CFD4C71FC2AE0000F88AA5 /* AssesmentCollecionLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssesmentCollecionLayout.swift; sourceTree = "<group>"; };
 		66CFD4C81FC2AE0000F88AA5 /* AssesmentCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AssesmentCollectionCell.xib; sourceTree = "<group>"; };
-		66CFD4CF1FC2AE7D00F88AA5 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,7 +69,6 @@
 				669698F61FB1964C0054AFC2 /* Assets.xcassets */,
 				669698F81FB1964C0054AFC2 /* LaunchScreen.storyboard */,
 				669698FB1FB1964C0054AFC2 /* Info.plist */,
-				669698F31FB1964C0054AFC2 /* AssesmentTable.xcdatamodeld */,
 			);
 			path = AssesmentTable;
 			sourceTree = "<group>";
@@ -85,7 +80,6 @@
 				66CFD4C51FC2AE0000F88AA5 /* AssesmentCollectionView.swift */,
 				66CFD4C61FC2AE0000F88AA5 /* AssesmentCollectionCell.swift */,
 				66CFD4C81FC2AE0000F88AA5 /* AssesmentCollectionCell.xib */,
-				66CFD4CF1FC2AE7D00F88AA5 /* README.md */,
 			);
 			path = AssesmentCollection;
 			sourceTree = "<group>";
@@ -151,7 +145,6 @@
 			files = (
 				669698FA1FB1964C0054AFC2 /* LaunchScreen.storyboard in Resources */,
 				669698F71FB1964C0054AFC2 /* Assets.xcassets in Resources */,
-				66CFD4D01FC2AE7D00F88AA5 /* README.md in Resources */,
 				669698F21FB1964C0054AFC2 /* Main.storyboard in Resources */,
 				66CFD4CC1FC2AE0000F88AA5 /* AssesmentCollectionCell.xib in Resources */,
 			);
@@ -169,7 +162,6 @@
 				66CFD4CB1FC2AE0000F88AA5 /* AssesmentCollecionLayout.swift in Sources */,
 				66CFD4C91FC2AE0000F88AA5 /* AssesmentCollectionView.swift in Sources */,
 				66CFD4CA1FC2AE0000F88AA5 /* AssesmentCollectionCell.swift in Sources */,
-				669698F51FB1964C0054AFC2 /* AssesmentTable.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -352,19 +344,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		669698F31FB1964C0054AFC2 /* AssesmentTable.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				669698F41FB1964C0054AFC2 /* AssesmentTable.xcdatamodel */,
-			);
-			currentVersion = 669698F41FB1964C0054AFC2 /* AssesmentTable.xcdatamodel */;
-			path = AssesmentTable.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 669698E11FB1964B0054AFC2 /* Project object */;
 }
