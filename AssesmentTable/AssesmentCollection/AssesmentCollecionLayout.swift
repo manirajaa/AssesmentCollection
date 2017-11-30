@@ -10,8 +10,8 @@
 import UIKit
 
 class AssesmentCollecionLayout: UICollectionViewLayout {
-    var numberOfColumns = 8
-    var numberOfStaticColumns:Int = 2
+    var numberOfColumns = 0
+    var numberOfStaticColumns:Int = 0
     
     var headerFont:UIFont = UIFont.systemFont(ofSize: 14.0)
     var contentFont:UIFont = UIFont.systemFont(ofSize: 14.0)
