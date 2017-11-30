@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AssesmentCollectionView: UICollectionView,UICollectionViewDelegate,UICollectionViewDataSource {
+class AssesmentCollectionView: UICollectionView {
     
     private let contentCellIdentifier = "ContentCellIdentifier"
     
@@ -68,8 +68,9 @@ class AssesmentCollectionView: UICollectionView,UICollectionViewDelegate,UIColle
         (collectionViewLayout as? AssesmentCollecionLayout)?.numberOfStaticColumns = numberOfStaticColumns
         super.reloadData()
     }
-    
-    //MARK: DATASOURCE
+}
+
+extension AssesmentCollectionView:UICollectionViewDelegate,UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return self.rowTitle.count
     }
@@ -93,7 +94,7 @@ class AssesmentCollectionView: UICollectionView,UICollectionViewDelegate,UIColle
         } else if indexPath.section < numberOfStaticRows || indexPath.row < numberOfStaticColumns {
             font = headerFont
         }
-
+        
         cell.contentLabel.font = font
         cell.rightSeperator.isHidden = true
         cell.bottomSeperator.isHidden = true
@@ -126,18 +127,19 @@ class AssesmentCollectionView: UICollectionView,UICollectionViewDelegate,UIColle
     }
     
     /* Displaying the shadow and other UI changes while scrolling
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if showColumnSeperator {
-            if scrollView.contentOffset.x > 0 {
-                
-            } else {
-                
-            }
-        }
-        if showRowSeperator {
-            
-        }
-    }
- */
-    
+     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+     if showColumnSeperator {
+     if scrollView.contentOffset.x > 0 {
+     
+     } else {
+     
+     }
+     }
+     if showRowSeperator {
+     
+     }
+     }
+     */
+
+
 }
