@@ -10,6 +10,8 @@
 import UIKit
 
 class AssesmentCollecionLayout: UICollectionViewLayout {
+    
+    // MARK: - Variables
     var numberOfColumns = 0
     var numberOfStaticColumns:Int = 0
     
