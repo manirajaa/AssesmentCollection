@@ -16,7 +16,18 @@
 		66CFD4CA1FC2AE0000F88AA5 /* AssesmentCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66CFD4C61FC2AE0000F88AA5 /* AssesmentCollectionCell.swift */; };
 		66CFD4CB1FC2AE0000F88AA5 /* AssesmentCollecionLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66CFD4C71FC2AE0000F88AA5 /* AssesmentCollecionLayout.swift */; };
 		66CFD4CC1FC2AE0000F88AA5 /* AssesmentCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 66CFD4C81FC2AE0000F88AA5 /* AssesmentCollectionCell.xib */; };
+		66CFD4DA1FC4254600F88AA5 /* AssesmentTableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66CFD4D91FC4254600F88AA5 /* AssesmentTableTests.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		66CFD4DC1FC4254600F88AA5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 669698E11FB1964B0054AFC2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 669698E81FB1964B0054AFC2;
+			remoteInfo = AssesmentTable;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		669698E91FB1964B0054AFC2 /* AssesmentTable.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AssesmentTable.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -30,10 +41,20 @@
 		66CFD4C61FC2AE0000F88AA5 /* AssesmentCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssesmentCollectionCell.swift; sourceTree = "<group>"; };
 		66CFD4C71FC2AE0000F88AA5 /* AssesmentCollecionLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssesmentCollecionLayout.swift; sourceTree = "<group>"; };
 		66CFD4C81FC2AE0000F88AA5 /* AssesmentCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AssesmentCollectionCell.xib; sourceTree = "<group>"; };
+		66CFD4D71FC4254600F88AA5 /* AssesmentTableTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AssesmentTableTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		66CFD4D91FC4254600F88AA5 /* AssesmentTableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssesmentTableTests.swift; sourceTree = "<group>"; };
+		66CFD4DB1FC4254600F88AA5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		669698E61FB1964B0054AFC2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		66CFD4D41FC4254600F88AA5 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -47,6 +68,7 @@
 			isa = PBXGroup;
 			children = (
 				669698EB1FB1964B0054AFC2 /* AssesmentTable */,
+				66CFD4D81FC4254600F88AA5 /* AssesmentTableTests */,
 				669698EA1FB1964B0054AFC2 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -55,6 +77,7 @@
 			isa = PBXGroup;
 			children = (
 				669698E91FB1964B0054AFC2 /* AssesmentTable.app */,
+				66CFD4D71FC4254600F88AA5 /* AssesmentTableTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -84,6 +107,15 @@
 			path = AssesmentCollection;
 			sourceTree = "<group>";
 		};
+		66CFD4D81FC4254600F88AA5 /* AssesmentTableTests */ = {
+			isa = PBXGroup;
+			children = (
+				66CFD4D91FC4254600F88AA5 /* AssesmentTableTests.swift */,
+				66CFD4DB1FC4254600F88AA5 /* Info.plist */,
+			);
+			path = AssesmentTableTests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -104,6 +136,24 @@
 			productReference = 669698E91FB1964B0054AFC2 /* AssesmentTable.app */;
 			productType = "com.apple.product-type.application";
 		};
+		66CFD4D61FC4254600F88AA5 /* AssesmentTableTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 66CFD4E01FC4254600F88AA5 /* Build configuration list for PBXNativeTarget "AssesmentTableTests" */;
+			buildPhases = (
+				66CFD4D31FC4254600F88AA5 /* Sources */,
+				66CFD4D41FC4254600F88AA5 /* Frameworks */,
+				66CFD4D51FC4254600F88AA5 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				66CFD4DD1FC4254600F88AA5 /* PBXTargetDependency */,
+			);
+			name = AssesmentTableTests;
+			productName = AssesmentTableTests;
+			productReference = 66CFD4D71FC4254600F88AA5 /* AssesmentTableTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -117,6 +167,11 @@
 					669698E81FB1964B0054AFC2 = {
 						CreatedOnToolsVersion = 9.0;
 						ProvisioningStyle = Automatic;
+					};
+					66CFD4D61FC4254600F88AA5 = {
+						CreatedOnToolsVersion = 9.0;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 669698E81FB1964B0054AFC2;
 					};
 				};
 			};
@@ -134,6 +189,7 @@
 			projectRoot = "";
 			targets = (
 				669698E81FB1964B0054AFC2 /* AssesmentTable */,
+				66CFD4D61FC4254600F88AA5 /* AssesmentTableTests */,
 			);
 		};
 /* End PBXProject section */
@@ -147,6 +203,13 @@
 				669698F71FB1964C0054AFC2 /* Assets.xcassets in Resources */,
 				669698F21FB1964C0054AFC2 /* Main.storyboard in Resources */,
 				66CFD4CC1FC2AE0000F88AA5 /* AssesmentCollectionCell.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		66CFD4D51FC4254600F88AA5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -165,7 +228,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		66CFD4D31FC4254600F88AA5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				66CFD4DA1FC4254600F88AA5 /* AssesmentTableTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		66CFD4DD1FC4254600F88AA5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 669698E81FB1964B0054AFC2 /* AssesmentTable */;
+			targetProxy = 66CFD4DC1FC4254600F88AA5 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		669698F01FB1964C0054AFC2 /* Main.storyboard */ = {
@@ -322,6 +401,36 @@
 			};
 			name = Release;
 		};
+		66CFD4DE1FC4254600F88AA5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = AssesmentTableTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.yml.AssesmentTableTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AssesmentTable.app/AssesmentTable";
+			};
+			name = Debug;
+		};
+		66CFD4DF1FC4254600F88AA5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = AssesmentTableTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.yml.AssesmentTableTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AssesmentTable.app/AssesmentTable";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -339,6 +448,15 @@
 			buildConfigurations = (
 				669698FF1FB1964C0054AFC2 /* Debug */,
 				669699001FB1964C0054AFC2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		66CFD4E01FC4254600F88AA5 /* Build configuration list for PBXNativeTarget "AssesmentTableTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				66CFD4DE1FC4254600F88AA5 /* Debug */,
+				66CFD4DF1FC4254600F88AA5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
