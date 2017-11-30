@@ -41,7 +41,7 @@ class AssesmentCollectionView: UICollectionView,UICollectionViewDelegate,UIColle
     func basicSetup() {
         dataSource = self
         delegate = self
-        self.register(UINib(nibName: "AssesmentCollectionCell", bundle: nil),
+        self.register(UINib(nibName: String(describing: AssesmentCollectionCell.self), bundle: nil),
                       forCellWithReuseIdentifier: contentCellIdentifier)
         self.collectionViewLayout  = AssesmentCollecionLayout()
         (collectionViewLayout as? AssesmentCollecionLayout)?.headerFont = headerFont
