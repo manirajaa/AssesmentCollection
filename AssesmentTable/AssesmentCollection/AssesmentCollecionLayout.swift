@@ -15,8 +15,8 @@ class AssesmentCollecionLayout: UICollectionViewLayout {
     var numberOfColumns = 0
     var numberOfStaticColumns:Int = 0
     
-    var headerFont:UIFont = UIFont.systemFont(ofSize: 14.0)
-    var contentFont:UIFont = UIFont.systemFont(ofSize: 14.0)
+    var headerFont:UIFont = Font.heavy.uifontWithDefaultSize()
+    var contentFont:UIFont = Font.light.uifontWithDefaultSize()
     
     var itemAttributes = [[UICollectionViewLayoutAttributes]]()
     var contentSize: CGSize = .zero
@@ -46,13 +46,13 @@ class AssesmentCollecionLayout: UICollectionViewLayout {
                     continue
                 }
                 let attributes = layoutAttributesForItem(at: IndexPath(item: item, section: section))!
-                if section == 0 {
+                if section == 0 && numberOfStaticRows > 0 {
                     var frame = attributes.frame
                     frame.origin.y = collectionView.contentOffset.y + collectionView.contentInset.top
                     attributes.frame = frame
                 }
                 
-                if item == 0 {
+                if item == 0  && numberOfStaticColumns > 0 {
                     var frame = attributes.frame
                     frame.origin.x = collectionView.contentOffset.x + collectionView.contentInset.left
                     attributes.frame = frame
@@ -66,7 +66,7 @@ class AssesmentCollecionLayout: UICollectionViewLayout {
                         height += sectionAttributes.frame.height
                     }
                     print("height = \(height)")
-                    frame.origin.y = collectionView.contentOffset.y + collectionView.contentInset.top + height //  sectionAttributes.frame.height
+                    frame.origin.y = collectionView.contentOffset.y + collectionView.contentInset.top + height
                     attributes.frame = frame
                 }
                 
@@ -99,7 +99,6 @@ class AssesmentCollecionLayout: UICollectionViewLayout {
             let filteredArray = section.filter { obj -> Bool in
                 return rect.intersects(obj.frame)
             }
-            
             attributes.append(contentsOf: filteredArray)
         }
         

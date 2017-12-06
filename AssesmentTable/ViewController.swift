@@ -26,11 +26,11 @@ class ViewController: UIViewController {
     
     private func initializeCollection() {
         collectionView.numberOfStaticRows = 2
-        collectionView.numberOfStaticColumns = 1
+        collectionView.numberOfStaticColumns = 0
         collectionView.columnTitle  = columnTitle
         collectionView.rowTitle = rowTitle
-        collectionView.headerFont = UIFont(name: "Avenir-Heavy", size: 14)!
-        collectionView.contentFont = UIFont(name: "Avenir-light", size: 14)!
+        collectionView.headerFont = Font.heavy.uifont(withSize: 16)
+        collectionView.contentFont = Font.medium.uifontWithDefaultSize()
         collectionView.showColumnSeperator = true
         collectionView.reloadData()
     }

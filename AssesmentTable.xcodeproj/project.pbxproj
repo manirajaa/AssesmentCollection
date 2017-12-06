@@ -17,6 +17,8 @@
 		66CFD4CB1FC2AE0000F88AA5 /* AssesmentCollecionLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66CFD4C71FC2AE0000F88AA5 /* AssesmentCollecionLayout.swift */; };
 		66CFD4CC1FC2AE0000F88AA5 /* AssesmentCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 66CFD4C81FC2AE0000F88AA5 /* AssesmentCollectionCell.xib */; };
 		66CFD4DA1FC4254600F88AA5 /* AssesmentTableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66CFD4D91FC4254600F88AA5 /* AssesmentTableTests.swift */; };
+		66F700BF1FD6A12000C83CD8 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F700BE1FD6A12000C83CD8 /* Color.swift */; };
+		66F700C11FD6A50700C83CD8 /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F700C01FD6A50700C83CD8 /* Font.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +46,8 @@
 		66CFD4D71FC4254600F88AA5 /* AssesmentTableTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AssesmentTableTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		66CFD4D91FC4254600F88AA5 /* AssesmentTableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssesmentTableTests.swift; sourceTree = "<group>"; };
 		66CFD4DB1FC4254600F88AA5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		66F700BE1FD6A12000C83CD8 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		66F700C01FD6A50700C83CD8 /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +107,8 @@
 				66CFD4C51FC2AE0000F88AA5 /* AssesmentCollectionView.swift */,
 				66CFD4C61FC2AE0000F88AA5 /* AssesmentCollectionCell.swift */,
 				66CFD4C81FC2AE0000F88AA5 /* AssesmentCollectionCell.xib */,
+				66F700BE1FD6A12000C83CD8 /* Color.swift */,
+				66F700C01FD6A50700C83CD8 /* Font.swift */,
 			);
 			path = AssesmentCollection;
 			sourceTree = "<group>";
@@ -222,9 +228,11 @@
 			files = (
 				669698EF1FB1964B0054AFC2 /* ViewController.swift in Sources */,
 				669698ED1FB1964B0054AFC2 /* AppDelegate.swift in Sources */,
+				66F700C11FD6A50700C83CD8 /* Font.swift in Sources */,
 				66CFD4CB1FC2AE0000F88AA5 /* AssesmentCollecionLayout.swift in Sources */,
 				66CFD4C91FC2AE0000F88AA5 /* AssesmentCollectionView.swift in Sources */,
 				66CFD4CA1FC2AE0000F88AA5 /* AssesmentCollectionCell.swift in Sources */,
+				66F700BF1FD6A12000C83CD8 /* Color.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
