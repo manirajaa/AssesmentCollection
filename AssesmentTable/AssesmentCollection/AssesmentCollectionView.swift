@@ -8,6 +8,10 @@
 
 import UIKit
 @objc protocol AssessmentCollectionDelegate {
+    func shouldShowRowSeperator(at indexpath : IndexPath) -> Bool
+    func shouldShowColumnSeperator(at indexpath : IndexPath) -> Bool
+    func textAlignment(forCellat indexpath:IndexPath) -> NSTextAlignment
+    
     func didSelectRow(at indexPath:IndexPath)
 }
 
@@ -43,11 +47,11 @@ class AssesmentCollectionView: UICollectionView {
             return self.collectionDatasource?.numberOfStaticRows(in: self) ?? 0
         }
     }
+    
     private var numberOfStaticColumns: Int {
         get {
             return self.collectionDatasource?.numberOfStaticColumn(in:self) ?? 0
         }
-
     }
     
     // Seperator
@@ -58,6 +62,8 @@ class AssesmentCollectionView: UICollectionView {
     var headerFont:UIFont = Font.heavy.uifontWithDefaultSize()
     var contentFont:UIFont = Font.medium.uifontWithDefaultSize()
     
+    var cellNormalColor = UIColor.white
+    var cellHiglightColor = UIColor(red: 242/255.0, green: 243/255.0, blue: 247/255.0, alpha: 1.0)
     //Column Title array. First object should be same as rowTitle array
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -109,11 +115,10 @@ extension AssesmentCollectionView:UICollectionViewDelegate,UICollectionViewDataS
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: contentCellIdentifier,
                                                       for: indexPath) as! AssesmentCollectionCell
         if indexPath.section % 2 != 0 {
-            cell.backgroundColor = UIColor(red: 242/255.0, green: 243/255.0, blue: 247/255.0, alpha: 1.0)
+            cell.backgroundColor = cellHiglightColor
         } else {
-            cell.backgroundColor = UIColor.white
+            cell.backgroundColor = cellNormalColor
         }
-        
         var font = contentFont
         if indexPath.section < numberOfStaticRows && indexPath.row < numberOfStaticColumns {
             font = headerFont
@@ -121,32 +126,13 @@ extension AssesmentCollectionView:UICollectionViewDelegate,UICollectionViewDataS
             font = headerFont
         }
         cell.contentLabel.font = font
-        
-        cell.rightSeperator.isHidden = true
-        cell.bottomSeperator.isHidden = true
-        if showRowSeperator {
-            if indexPath.section == numberOfStaticRows - 1 {
-                cell.bottomSeperator.isHidden = false
-            }
-        }
-        if showColumnSeperator {
-            if indexPath.row == numberOfStaticColumns - 1 {
-                cell.rightSeperator.isHidden = false
-            }
-        }
-        
-        cell.contentLabel.textAlignment = .center
+        cell.rightSeperator.isHidden = self.collectionDelegate?.shouldShowColumnSeperator(at: indexPath) ?? true
+        cell.bottomSeperator.isHidden = self.collectionDelegate?.shouldShowRowSeperator(at: indexPath) ?? true
+        cell.contentLabel.textAlignment = self.collectionDelegate?.textAlignment(forCellat: indexPath) ?? .center
         if indexPath.section == 0 {
-            if indexPath.row == 0 {
-                cell.contentLabel.textAlignment = .right
-            }
             cell.contentLabel.text = self.headers[indexPath.row]
         } else {
             cell.contentLabel.text = self.tableData[indexPath.section - 1][indexPath.row]
-
-            if indexPath.row == 0 {
-                cell.contentLabel.textAlignment = .right
-            }
         }
         
         return cell

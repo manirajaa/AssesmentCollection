@@ -21,8 +21,12 @@ class AssesmentCollecionLayout: UICollectionViewLayout {
     
     var headerFont:UIFont = Font.heavy.uifontWithDefaultSize()
     var contentFont:UIFont = Font.light.uifontWithDefaultSize()
-
+    
     var cellTitle: ((_ indexPath: IndexPath) -> (String))?
+    
+}
+    //MARK: -
+extension AssesmentCollecionLayout {
     
     override func prepare() {
         guard let collectionView = collectionView else {
@@ -166,9 +170,10 @@ extension AssesmentCollecionLayout {
     func sizeForString(_ text:String,_ font:UIFont) -> CGSize {
         let size: CGSize = text.size(withAttributes: [NSAttributedStringKey.font: font])
         let width: CGFloat = size.width + 50
-        return CGSize(width: width, height: size.height + 15)
+        return CGSize(width: width, height: size.height + 20)
     }
     
+    //MARK:- Find Size
     func findSizes(collectionView: UICollectionView) {
         for section in 0..<collectionView.numberOfSections {
             for index in 0..<numberOfColumns {
