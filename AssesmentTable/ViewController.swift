@@ -16,11 +16,11 @@ class ViewController: UIViewController {
         self.collectionView.reloadData()
     }
     // DATA
-    let headers: [String] = ["Admission Date","Discharge Date","Duration", "Discharge Diagnosis (code and description)"]
     
     let data :[[String]] = [
-        ["Admission Date","Discharge Date","Duration", "Discharge Diagnosis (code and description)"]
+        ["Admission Date","Discharge Date","Duration", "Discharge Diagnosis (code and description)"],["Admission Date","Discharge Date","Duration", "Discharge Diagnosis (code and description)"],["Admission Date","Discharge Date","Duration", "Discharge Diagnosis (code and description)"],["Admission Date","Discharge Date","Duration", "Discharge Diagnosis (code and description)"],["Admission Date","Discharge Date","Duration", "Discharge Diagnosis (code and description)"],["Admission Date","Discharge Date","Duration", "Discharge Diagnosis (code and description)"],["Admission Date","Discharge Date","Duration", "Discharge Diagnosis (code and description)"],["Admission Date","Discharge Date","Duration", "Discharge Diagnosis (code and description)"],["Admission Date","Discharge Date","Duration", "Discharge Diagnosis (code and description)"],["Admission Date","Discharge Date","Duration", "Discharge Diagnosis (code and description)"],["Admission Date","Discharge Date","Duration", "Discharge Diagnosis (code and description)"],["Admission Date","Discharge Date","Duration", "Discharge Diagnosis (code and description)"]
     ]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         initializeCollection()
@@ -40,24 +40,36 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 }
+
 extension ViewController:AssessmentCollectionDelegate,AssessmentCollectionDataSource {
     //DataSource
-    func numberOfStaticRows(in collectionView: UICollectionView) -> Int {
-        return 1
+    func numberOfColumns(in collectionView:UICollectionView) -> Int {
+        return data.first?.count ?? 0
     }
     
-    func numberOfStaticColumn(in collectionView: UICollectionView) -> Int {
-        return 0
+    func numberOfRows(in collectionView:UICollectionView) -> Int {
+        return data.count
     }
     
-    func headers(for collectionView:UICollectionView) -> [String] {
-        return headers
-    }
-    
-    func tableData(for collectionView:UICollectionView) -> [[String]] {
-        return data
+    func titleForCell(in collectionView:UICollectionView, at indexpath: IndexPath) -> String {
+        return data[indexpath.section][indexpath.row]
     }
 
+    func collectionCell(isColumnSeperatorHidden indexpath : IndexPath) -> Bool {
+        if indexpath.row == 0 {
+            return false
+        } else {
+            return true
+        }
+    }
+    
+    func textAlignment(forCellat indexpath: IndexPath) -> NSTextAlignment {
+        if indexpath.row == 0 {
+            return .right
+        } else {
+            return .center
+        }
+    }
     //Delegate
     func didSelectRow(at indexPath: IndexPath) {
         print(indexPath.row,indexPath.section)

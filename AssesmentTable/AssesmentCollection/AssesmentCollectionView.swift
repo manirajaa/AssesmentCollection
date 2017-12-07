@@ -7,20 +7,62 @@
 //
 
 import UIKit
-@objc protocol AssessmentCollectionDelegate {
-    func shouldShowRowSeperator(at indexpath : IndexPath) -> Bool
-    func shouldShowColumnSeperator(at indexpath : IndexPath) -> Bool
+// DELEGATE
+protocol AssessmentCollectionDelegate: class {
+    func collectionCell(isRowSeperatorHidden indexpath : IndexPath) -> Bool
+    func collectionCell(isColumnSeperatorHidden indexpath : IndexPath) -> Bool
     func textAlignment(forCellat indexpath:IndexPath) -> NSTextAlignment
-    
     func didSelectRow(at indexPath:IndexPath)
 }
 
-@objc protocol AssessmentCollectionDataSource {
+extension AssessmentCollectionDelegate {
+    func collectionCell(isRowSeperatorHidden indexpath : IndexPath) -> Bool {
+        return true
+    }
+    
+    func collectionCell(isColumnSeperatorHidden indexpath : IndexPath) -> Bool {
+        return true
+    }
+    
+    func textAlignment(forCellat indexpath:IndexPath) -> NSTextAlignment {
+        return .center
+    }
+    
+    func didSelectRow(at indexPath:IndexPath) {
+        //
+    }
+}
+
+// DATA SOURCE
+protocol AssessmentCollectionDataSource: class {
+    func titleForCell(in collectionView:UICollectionView, at indexpath: IndexPath) -> String
+    func numberOfColumns(in collectionView:UICollectionView) -> Int
+    func numberOfRows(in collectionView:UICollectionView) -> Int
     func numberOfStaticRows(in collectionView:UICollectionView) -> Int
     func numberOfStaticColumn(in collectionView:UICollectionView) -> Int
+    
+    
     func headers(for collectionView:UICollectionView) -> [String]
     func tableData(for collectionView:UICollectionView) -> [[String]]
 }
+extension AssessmentCollectionDataSource {
+    func numberOfStaticRows(in collectionView: UICollectionView) -> Int {
+        return 0
+    }
+    
+    func numberOfStaticColumn(in collectionView: UICollectionView) -> Int {
+        return 0
+    }
+    
+    func headers(for collectionView:UICollectionView) -> [String] {
+        return []
+    }
+    
+    func tableData(for collectionView:UICollectionView) -> [[String]] {
+        return []
+    }
+}
+
 
 class AssesmentCollectionView: UICollectionView {
     
@@ -29,17 +71,17 @@ class AssesmentCollectionView: UICollectionView {
 
     private let contentCellIdentifier = "ContentCellIdentifier"
 
-    var tableData:[[String]] {
-        get {
-          return self.collectionDatasource?.tableData(for: self) ?? []
-        }
-    }
+//    var tableData:[[String]] {
+//        get {
+//          return self.collectionDatasource?.tableData(for: self) ?? []
+//        }
+//    }
     
-    var headers:[String] {
-        get {
-           return self.collectionDatasource?.headers(for: self) ?? []
-        }
-    }
+//    var headers:[String] {
+//        get {
+//           return self.collectionDatasource?.headers(for: self) ?? []
+//        }
+//    }
 
     // Static contents
     private var numberOfStaticRows: Int {
@@ -64,7 +106,7 @@ class AssesmentCollectionView: UICollectionView {
     
     var cellNormalColor = UIColor.white
     var cellHiglightColor = UIColor(red: 242/255.0, green: 243/255.0, blue: 247/255.0, alpha: 1.0)
-    //Column Title array. First object should be same as rowTitle array
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         basicSetup()
@@ -83,18 +125,16 @@ class AssesmentCollectionView: UICollectionView {
         (collectionViewLayout as? AssesmentCollecionLayout)?.contentFont = contentFont
         (collectionViewLayout as? AssesmentCollecionLayout)?.cellTitle = { [weak self] indexPath in
             guard let `self` = self else { return "" }
-            if indexPath.section == 0 {
-                return self.headers[indexPath.row]
-            } else {
-                return self.tableData[indexPath.section-1][indexPath.row]
-            }
+            
+            return (self.collectionDatasource?.titleForCell(in: self, at: indexPath))!
+            
         }
     }
     
     // Reload the content by setting up the new content.
     override func reloadData() {
         (collectionViewLayout as? AssesmentCollecionLayout)?.itemAttributes.removeAll()
-        (collectionViewLayout as? AssesmentCollecionLayout)?.numberOfColumns = self.headers.count
+        (collectionViewLayout as? AssesmentCollecionLayout)?.numberOfColumns = self.collectionDatasource?.numberOfColumns(in:self) ?? 0
         (collectionViewLayout as? AssesmentCollecionLayout)?.numberOfStaticRows = self.numberOfStaticRows
         (collectionViewLayout as? AssesmentCollecionLayout)?.numberOfStaticColumns = self.numberOfStaticColumns
         super.reloadData()
@@ -103,11 +143,11 @@ class AssesmentCollectionView: UICollectionView {
 
 extension AssesmentCollectionView:UICollectionViewDelegate,UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return self.tableData.count + 1
+        return self.collectionDatasource?.numberOfRows(in:collectionView) ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.headers.count
+        return self.collectionDatasource?.numberOfColumns(in: collectionView) ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -119,6 +159,11 @@ extension AssesmentCollectionView:UICollectionViewDelegate,UICollectionViewDataS
         } else {
             cell.backgroundColor = cellNormalColor
         }
+        
+        cell.rightSeperator.isHidden = self.collectionDelegate?.collectionCell(isColumnSeperatorHidden: indexPath) ?? false
+        cell.bottomSeperator.isHidden = self.collectionDelegate?.collectionCell(isRowSeperatorHidden: indexPath) ?? false
+        cell.contentLabel.textAlignment = self.collectionDelegate?.textAlignment(forCellat: indexPath) ?? .center
+        
         var font = contentFont
         if indexPath.section < numberOfStaticRows && indexPath.row < numberOfStaticColumns {
             font = headerFont
@@ -126,15 +171,8 @@ extension AssesmentCollectionView:UICollectionViewDelegate,UICollectionViewDataS
             font = headerFont
         }
         cell.contentLabel.font = font
-        cell.rightSeperator.isHidden = self.collectionDelegate?.shouldShowColumnSeperator(at: indexPath) ?? true
-        cell.bottomSeperator.isHidden = self.collectionDelegate?.shouldShowRowSeperator(at: indexPath) ?? true
-        cell.contentLabel.textAlignment = self.collectionDelegate?.textAlignment(forCellat: indexPath) ?? .center
-        if indexPath.section == 0 {
-            cell.contentLabel.text = self.headers[indexPath.row]
-        } else {
-            cell.contentLabel.text = self.tableData[indexPath.section - 1][indexPath.row]
-        }
         
+        cell.contentLabel.text = self.collectionDatasource?.titleForCell(in: collectionView, at: indexPath)        
         return cell
     }
     
@@ -142,7 +180,8 @@ extension AssesmentCollectionView:UICollectionViewDelegate,UICollectionViewDataS
         self.collectionDelegate?.didSelectRow(at: indexPath)
     }
     
-    /* Displaying the shadow and other UI changes while scrolling
+    /*
+     //TODO: Displaying the shadow and other UI changes while scrolling
      func scrollViewDidScroll(_ scrollView: UIScrollView) {
      if showColumnSeperator {
      if scrollView.contentOffset.x > 0 {
@@ -156,6 +195,4 @@ extension AssesmentCollectionView:UICollectionViewDelegate,UICollectionViewDataS
      }
      }
      */
-
-
 }
