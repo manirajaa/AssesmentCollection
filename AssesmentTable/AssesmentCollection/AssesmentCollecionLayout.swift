@@ -14,17 +14,15 @@ class AssesmentCollecionLayout: UICollectionViewLayout {
     // MARK: - Variables
     var numberOfColumns = 0
     var numberOfStaticColumns:Int = 0
+    var numberOfStaticRows:Int = 0
+    var itemSizeArray = [CGSize]()
+    var itemAttributes = [[UICollectionViewLayoutAttributes]]()
+    var contentSize: CGSize = .zero
     
     var headerFont:UIFont = Font.heavy.uifontWithDefaultSize()
     var contentFont:UIFont = Font.light.uifontWithDefaultSize()
-    
-    var itemAttributes = [[UICollectionViewLayoutAttributes]]()
-    var contentSize: CGSize = .zero
-    var itemSizeArray = [CGSize]()
-    
-    var numberOfStaticRows:Int = 1
 
-    var cellTitleCallBack: ((_ indexPath: IndexPath) -> (String))?
+    var cellTitle: ((_ indexPath: IndexPath) -> (String))?
     
     override func prepare() {
         guard let collectionView = collectionView else {
@@ -65,7 +63,6 @@ class AssesmentCollecionLayout: UICollectionViewLayout {
                         let sectionAttributes = layoutAttributesForItem(at: IndexPath(item: item, section: section - 1))!
                         height += sectionAttributes.frame.height
                     }
-                    print("height = \(height)")
                     frame.origin.y = collectionView.contentOffset.y + collectionView.contentInset.top + height
                     attributes.frame = frame
                 }
@@ -168,7 +165,7 @@ extension AssesmentCollecionLayout {
     
     func sizeForString(_ text:String,_ font:UIFont) -> CGSize {
         let size: CGSize = text.size(withAttributes: [NSAttributedStringKey.font: font])
-        let width: CGFloat = size.width + 40
+        let width: CGFloat = size.width + 50
         return CGSize(width: width, height: size.height + 15)
     }
     
@@ -176,7 +173,7 @@ extension AssesmentCollecionLayout {
         for section in 0..<collectionView.numberOfSections {
             for index in 0..<numberOfColumns {
                 let indexPath = IndexPath(item: index, section: section)
-                let titleString = cellTitleCallBack?(indexPath) ?? ""
+                let titleString = cellTitle?(indexPath) ?? ""
                 var font = contentFont
                 if section < numberOfStaticRows && index < numberOfStaticColumns {
                     font = headerFont
@@ -193,6 +190,9 @@ extension AssesmentCollecionLayout {
                         let previous_size = itemSizeArray[index]
                         if previous_size.width > size.width {
                             size.width = previous_size.width
+                        }
+                        if previous_size.height > size.height {
+                            size.height = previous_size.height
                         }
                         itemSizeArray[index] = size
                     } else {

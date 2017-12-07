@@ -7,32 +7,58 @@
 //
 
 import UIKit
+@objc protocol AssessmentCollectionDelegate {
+    func didSelectRow(at indexPath:IndexPath)
+}
+
+@objc protocol AssessmentCollectionDataSource {
+    func numberOfStaticRows(in collectionView:UICollectionView) -> Int
+    func numberOfStaticColumn(in collectionView:UICollectionView) -> Int
+    func headers(for collectionView:UICollectionView) -> [String]
+    func tableData(for collectionView:UICollectionView) -> [[String]]
+}
 
 class AssesmentCollectionView: UICollectionView {
     
+    var collectionDatasource:AssessmentCollectionDataSource?
+    var collectionDelegate:AssessmentCollectionDelegate?
+
     private let contentCellIdentifier = "ContentCellIdentifier"
+
+    var tableData:[[String]] {
+        get {
+          return self.collectionDatasource?.tableData(for: self) ?? []
+        }
+    }
     
+    var headers:[String] {
+        get {
+           return self.collectionDatasource?.headers(for: self) ?? []
+        }
+    }
+
     // Static contents
-    var numberOfStaticRows: Int = 1
-    var numberOfStaticColumns: Int = 1
+    private var numberOfStaticRows: Int {
+        get {
+            return self.collectionDatasource?.numberOfStaticRows(in: self) ?? 0
+        }
+    }
+    private var numberOfStaticColumns: Int {
+        get {
+            return self.collectionDatasource?.numberOfStaticColumn(in:self) ?? 0
+        }
+
+    }
     
     // Seperator
     var showColumnSeperator: Bool = false
     var showRowSeperator:Bool = false
     
     // FONT
-    var headerFont:UIFont = UIFont.systemFont(ofSize: 14.0)
-    var contentFont:UIFont = UIFont.systemFont(ofSize: 14.0)
+    var headerFont:UIFont = Font.heavy.uifontWithDefaultSize()
+    var contentFont:UIFont = Font.medium.uifontWithDefaultSize()
     
-    // TABLE content
-    private let contentText = "Values"
-
     //Column Title array. First object should be same as rowTitle array
-    var columnTitle : [String] = []
-    
-    // Row title array. First object should be same as columnTitle array
-    var rowTitle: [String] = []
-
     override func awakeFromNib() {
         super.awakeFromNib()
         basicSetup()
@@ -41,21 +67,20 @@ class AssesmentCollectionView: UICollectionView {
     func basicSetup() {
         dataSource = self
         delegate = self
+        
         self.register(UINib(nibName: String(describing: AssesmentCollectionCell.self), bundle: nil),
                       forCellWithReuseIdentifier: contentCellIdentifier)
         self.collectionViewLayout  = AssesmentCollecionLayout()
         (collectionViewLayout as? AssesmentCollecionLayout)?.headerFont = headerFont
+        (collectionViewLayout as? AssesmentCollecionLayout)?.numberOfStaticRows = self.numberOfStaticRows
+        (collectionViewLayout as? AssesmentCollecionLayout)?.numberOfStaticColumns = self.numberOfStaticColumns
         (collectionViewLayout as? AssesmentCollecionLayout)?.contentFont = contentFont
-        (collectionViewLayout as? AssesmentCollecionLayout)?.cellTitleCallBack = { [weak self] indexPath in
+        (collectionViewLayout as? AssesmentCollecionLayout)?.cellTitle = { [weak self] indexPath in
             guard let `self` = self else { return "" }
             if indexPath.section == 0 {
-                return (self.columnTitle[indexPath.row])
+                return self.headers[indexPath.row]
             } else {
-                if indexPath.row == 0 {
-                    return (self.rowTitle[indexPath.section - 1])
-                } else {
-                    return self.contentText
-                }
+                return self.tableData[indexPath.section-1][indexPath.row]
             }
         }
     }
@@ -63,20 +88,20 @@ class AssesmentCollectionView: UICollectionView {
     // Reload the content by setting up the new content.
     override func reloadData() {
         (collectionViewLayout as? AssesmentCollecionLayout)?.itemAttributes.removeAll()
-        (collectionViewLayout as? AssesmentCollecionLayout)?.numberOfColumns = columnTitle.count
-        (collectionViewLayout as? AssesmentCollecionLayout)?.numberOfStaticRows = numberOfStaticRows
-        (collectionViewLayout as? AssesmentCollecionLayout)?.numberOfStaticColumns = numberOfStaticColumns
+        (collectionViewLayout as? AssesmentCollecionLayout)?.numberOfColumns = self.headers.count
+        (collectionViewLayout as? AssesmentCollecionLayout)?.numberOfStaticRows = self.numberOfStaticRows
+        (collectionViewLayout as? AssesmentCollecionLayout)?.numberOfStaticColumns = self.numberOfStaticColumns
         super.reloadData()
     }
 }
 
 extension AssesmentCollectionView:UICollectionViewDelegate,UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return self.rowTitle.count
+        return self.tableData.count + 1
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.columnTitle.count
+        return self.headers.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -88,14 +113,15 @@ extension AssesmentCollectionView:UICollectionViewDelegate,UICollectionViewDataS
         } else {
             cell.backgroundColor = UIColor.white
         }
+        
         var font = contentFont
         if indexPath.section < numberOfStaticRows && indexPath.row < numberOfStaticColumns {
             font = headerFont
         } else if indexPath.section < numberOfStaticRows || indexPath.row < numberOfStaticColumns {
             font = headerFont
         }
-        
         cell.contentLabel.font = font
+        
         cell.rightSeperator.isHidden = true
         cell.bottomSeperator.isHidden = true
         if showRowSeperator {
@@ -114,16 +140,20 @@ extension AssesmentCollectionView:UICollectionViewDelegate,UICollectionViewDataS
             if indexPath.row == 0 {
                 cell.contentLabel.textAlignment = .right
             }
-            cell.contentLabel.text = self.columnTitle[indexPath.row]
+            cell.contentLabel.text = self.headers[indexPath.row]
         } else {
+            cell.contentLabel.text = self.tableData[indexPath.section - 1][indexPath.row]
+
             if indexPath.row == 0 {
-                cell.contentLabel.text = self.rowTitle[indexPath.section]
                 cell.contentLabel.textAlignment = .right
-            } else {
-                cell.contentLabel.text = contentText
             }
         }
+        
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.collectionDelegate?.didSelectRow(at: indexPath)
     }
     
     /* Displaying the shadow and other UI changes while scrolling
