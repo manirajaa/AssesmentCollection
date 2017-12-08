@@ -9,33 +9,11 @@
 import Foundation
 import UIKit
 
-enum Font {
-    case heavy
-    case medium
-    case light
+enum Font: String {
     
-    func uifont(withSize size:CGFloat = 14) -> UIFont {
-        switch self {
-        case .heavy:
-            return UIFont(name: "Avenir-Heavy", size: size)!
-        case .medium:
-            return UIFont(name: "Avenir-Medium", size: size)!
-        case .light:
-            return UIFont(name: "Avenir-Light", size: size)!
-        }
-    }
-    
-    func uifontWithDefaultSize() -> UIFont {
-        switch self {
-        case .heavy:
-            return UIFont(name: "Avenir-Heavy", size: 14)!
-        case .medium:
-            return UIFont(name: "Avenir-Medium", size: 14)!
-        case .light:
-            return UIFont(name: "Avenir-Light", size: 14)!
-        }
-    }
+    case AvenirHeavy = "Avenir-Heavy"
+    case AvenirMedium = "Avenir-Medium"
+    case AvenirLight = "Avenir-Light"
 
-    
-
+    func font(size:CGFloat = 14) -> UIFont { return UIFont(name: self.rawValue, size: size)! }
 }

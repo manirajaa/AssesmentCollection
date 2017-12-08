@@ -15,14 +15,14 @@ class AssesmentCollecionLayout: UICollectionViewLayout {
     var numberOfColumns = 0
     var numberOfStaticColumns:Int = 0
     var numberOfStaticRows:Int = 0
-    var itemSizeArray = [CGSize]()
+
     var itemAttributes = [[UICollectionViewLayoutAttributes]]()
-    var contentSize: CGSize = .zero
     
-    var headerFont:UIFont = Font.heavy.uifontWithDefaultSize()
-    var contentFont:UIFont = Font.light.uifontWithDefaultSize()
+    private var itemSizeArray = [CGSize]()
+    private var contentSize: CGSize = .zero
+    private var contentFont:UIFont = Font.AvenirMedium.font()
     
-    var cellTitle: ((_ indexPath: IndexPath) -> (String))?
+    var cellTitleAttributes: ((_ indexPath: IndexPath) -> (title:String,font:UIFont))?
     
 }
     //MARK: -
@@ -63,7 +63,7 @@ extension AssesmentCollecionLayout {
                 if section > 0 && section < numberOfStaticRows {
                     var frame = attributes.frame
                     var height:CGFloat = 0
-                    for _ in 0..<(numberOfStaticRows - section) {
+                    for _ in 0..<section {
                         let sectionAttributes = layoutAttributesForItem(at: IndexPath(item: item, section: section - 1))!
                         height += sectionAttributes.frame.height
                     }
@@ -178,14 +178,8 @@ extension AssesmentCollecionLayout {
         for section in 0..<collectionView.numberOfSections {
             for index in 0..<numberOfColumns {
                 let indexPath = IndexPath(item: index, section: section)
-                let titleString = cellTitle?(indexPath) ?? ""
-                var font = contentFont
-                if section < numberOfStaticRows && index < numberOfStaticColumns {
-                    font = headerFont
-                } else if section < numberOfStaticRows || index < numberOfStaticColumns {
-                  font = headerFont
-                }
-
+                let titleString = cellTitleAttributes?(indexPath).title ?? ""
+                let font = cellTitleAttributes?(indexPath).font ?? contentFont
                 var size = sizeForString(titleString,font)
                 
                 if itemSizeArray.isEmpty  {
