@@ -8,7 +8,9 @@
 
 import UIKit
 
-class AssesmentCollectionCell: UICollectionViewCell {
+class TabularCollectionCell: UICollectionViewCell {
+    static let identifier: String = "TabularCollectionCellID"
+    
     @IBOutlet weak var contentLabel: UILabel!
     @IBOutlet weak var rightSeperator: UIView!
     @IBOutlet weak var bottomSeperator: UIView!

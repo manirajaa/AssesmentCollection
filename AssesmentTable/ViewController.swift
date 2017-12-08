@@ -9,7 +9,7 @@
 import UIKit
 
 class ViewController: UIViewController {
-    @IBOutlet weak var collectionView: AssesmentCollectionView!
+    @IBOutlet weak var collectionView: TabularCollectionView!
     
     @IBAction func reloadCollection(_ sender: Any) {
         // Can update the data content here.
@@ -18,23 +18,23 @@ class ViewController: UIViewController {
     // DATA
     
     let data :[[String]] = [
-        ["Admission Date","Discharge Date","Duration", "Discharge Diagnosis (code and description)"],
+        ["Admission Date","Discharge Date","Duration", "Discharge)"],
         ["value","Discharge Date","Duration", "Discharge Diagnosis (code and description)"],
         ["condition","Discharge Date","Duration", "Discharge Diagnosis (code and description)"],
         ["applied","Discharge Date","Duration", "Discharge Diagnosis (code and description)"],
         ["there","Discharge Date","Duration", "Discharge Diagnosis (code and description)"],
+        ["Admission Date","Discharge Date","Duration", "Discharge )"],
+        ["Admission Date","Discharge Date","Duration", "Discharge  description)"],
+        ["Admission Date","Discharge Date","Duration", "Discharge )"],
+        ["Admission Date","Discharge Date","Duration", "Discharge Diagnosis (code and description)"],
+        ["Admission Date","Discharge Date","Duration", "Discharge"],
         ["Admission Date","Discharge Date","Duration", "Discharge Diagnosis (code and description)"],
         ["Admission Date","Discharge Date","Duration", "Discharge Diagnosis (code and description)"],
         ["Admission Date","Discharge Date","Duration", "Discharge Diagnosis (code and description)"],
+        ["Admission Date","Discharge Date","Duration", ")"],
         ["Admission Date","Discharge Date","Duration", "Discharge Diagnosis (code and description)"],
         ["Admission Date","Discharge Date","Duration", "Discharge Diagnosis (code and description)"],
-        ["Admission Date","Discharge Date","Duration", "Discharge Diagnosis (code and description)"],
-        ["Admission Date","Discharge Date","Duration", "Discharge Diagnosis (code and description)"],
-        ["Admission Date","Discharge Date","Duration", "Discharge Diagnosis (code and description)"],
-        ["Admission Date","Discharge Date","Duration", "Discharge Diagnosis (code and description)"],
-        ["Admission Date","Discharge Date","Duration", "Discharge Diagnosis (code and description)"],
-        ["Admission Date","Discharge Date","Duration", "Discharge Diagnosis (code and description)"],
-        ["Admission Date","Discharge Date","Duration", "Discharge Diagnosis (code and description)"],
+        ["Admission Date","Discharge Date","Duration", "Discharge Diagnosis)"],
         ["Admission Date","Discharge Date","Duration", "Discharge Diagnosis (code and description)"],
         ["Admission Date","Discharge Date","Duration", "Discharge Diagnosis (code and description)"],
         ["Admission Date","Discharge Date","Duration", "Discharge Diagnosis (code and description)"],
@@ -61,25 +61,8 @@ class ViewController: UIViewController {
     }
 }
 
-extension ViewController:AssessmentCollectionDelegate,AssessmentCollectionDataSource {
-    //DataSource
-    func numberOfColumns(in collectionView:UICollectionView) -> Int {
-        return data.first?.count ?? 0
-    }
-    
-    func numberOfRows(in collectionView:UICollectionView) -> Int {
-        return data.count
-    }
-    
-    func numberOfStaticRows(in collectionView: UICollectionView) -> Int {
-        return 3
-    }
-    
-    func numberOfStaticColumn(in collectionView: UICollectionView) -> Int {
-        return 2
-    }
-    
-    func titleAttributesForCell(in collectionView:UICollectionView, at indexpath: IndexPath) -> CellTitleAttributes {
+extension ViewController: TabularCollectionDelegate, TabularCollectionDataSource {
+    func tabularView(_ tabularView: TabularCollectionView, titleAttributesForCell indexpath: IndexPath) -> CellTitleAttributes {
         var font = Font.AvenirMedium.font()
         var textAlignment = NSTextAlignment.center
         if indexpath.section == 0 {
@@ -91,7 +74,15 @@ extension ViewController:AssessmentCollectionDelegate,AssessmentCollectionDataSo
         let titleAttribute = CellTitleAttributes(title: data[indexpath.section][indexpath.row], font: font, textAlignment: textAlignment)
         return titleAttribute
     }
-
+    
+    func numberOfColumns(in tabularView: TabularCollectionView) -> Int {
+        return data.first?.count ?? 0
+    }
+    
+    func numberOfRows(in tabularView: TabularCollectionView) -> Int {
+        return data.count
+    }
+    
     func collectionCell(isColumnSeperatorHidden indexpath : IndexPath) -> Bool {
         if indexpath.row == 0 {
             return false
@@ -101,8 +92,6 @@ extension ViewController:AssessmentCollectionDelegate,AssessmentCollectionDataSo
     }
     
     //Delegate
-    func didSelectRow(at indexPath: IndexPath) {
-        print(indexPath.row,indexPath.section)
-    }
+    func tabularView(_ tabularView: TabularCollectionView, didSeletItemAt indexPath: IndexPath) { }
 }
 

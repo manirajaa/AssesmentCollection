@@ -6,27 +6,26 @@
 //  Copyright © 2017 Manikandan r. All rights reserved.
 //
 
-
 import UIKit
 
-class AssesmentCollecionLayout: UICollectionViewLayout {
+class TabularLayout: UICollectionViewLayout {
     
     // MARK: - Variables
     var numberOfColumns = 0
-    var numberOfStaticColumns:Int = 0
-    var numberOfStaticRows:Int = 0
-
+    var numberOfStaticColumns: Int = 0
+    var numberOfStaticRows: Int = 0
+    
     var itemAttributes = [[UICollectionViewLayoutAttributes]]()
     
     private var itemSizeArray = [CGSize]()
     private var contentSize: CGSize = .zero
-    private var contentFont:UIFont = Font.AvenirMedium.font()
+    private var contentFont: UIFont = Font.AvenirMedium.font()
     
-    var cellTitleAttributes: ((_ indexPath: IndexPath) -> (title:String,font:UIFont))?
+    var cellTitleAttributes: ((_ indexPath: IndexPath) -> (title: String, font: UIFont))?
     
 }
-    //MARK: -
-extension AssesmentCollecionLayout {
+// MARK: -
+extension TabularLayout {
     
     override func prepare() {
         guard let collectionView = collectionView else {
@@ -47,7 +46,9 @@ extension AssesmentCollecionLayout {
                 if section > numberOfStaticRows - 1 && item > numberOfStaticColumns - 1 {
                     continue
                 }
-                let attributes = layoutAttributesForItem(at: IndexPath(item: item, section: section))!
+                guard let attributes = layoutAttributesForItem(at: IndexPath(item: item, section: section)) else {
+                    return
+                }
                 if section == 0 && numberOfStaticRows > 0 {
                     var frame = attributes.frame
                     frame.origin.y = collectionView.contentOffset.y + collectionView.contentInset.top
@@ -62,9 +63,9 @@ extension AssesmentCollecionLayout {
                 
                 if section > 0 && section < numberOfStaticRows {
                     var frame = attributes.frame
-                    var height:CGFloat = 0
+                    var height: CGFloat = 0
                     for _ in 0..<section {
-                        let sectionAttributes = layoutAttributesForItem(at: IndexPath(item: item, section: section - 1))!
+                        guard let sectionAttributes = layoutAttributesForItem(at: IndexPath(item: item, section: section - 1)) else { return }
                         height += sectionAttributes.frame.height
                     }
                     frame.origin.y = collectionView.contentOffset.y + collectionView.contentInset.top + height
@@ -73,9 +74,9 @@ extension AssesmentCollecionLayout {
                 
                 if item > 0 && item < numberOfStaticColumns {
                     var frame = attributes.frame
-                    var width:CGFloat = 0
+                    var width: CGFloat = 0
                     for index in 0..<item {
-                        let sectionAttributes = layoutAttributesForItem(at: IndexPath(item: index, section: section))!
+                        guard let sectionAttributes = layoutAttributesForItem(at: IndexPath(item: index, section: section)) else { return }
                         width += sectionAttributes.frame.width
                     }
                     frame.origin.x = collectionView.contentOffset.x + collectionView.contentInset.left + width //sectionAttributes.frame.width
@@ -113,7 +114,7 @@ extension AssesmentCollecionLayout {
 }
 
 // MARK: - Helpers
-extension AssesmentCollecionLayout {
+extension TabularLayout {
     
     func generateItemAttributes(collectionView: UICollectionView) {
         if itemSizeArray.count != numberOfColumns {
@@ -130,7 +131,6 @@ extension AssesmentCollecionLayout {
             
             for index in 0..<numberOfColumns {
                 let itemWidth = itemSizeArray[index]
-
                 
                 let indexPath = IndexPath(item: index, section: section)
                 
@@ -167,22 +167,22 @@ extension AssesmentCollecionLayout {
         }
     }
     
-    func sizeForString(_ text:String,_ font:UIFont) -> CGSize {
+    func sizeForString(_ text: String, _ font: UIFont) -> CGSize {
         let size: CGSize = text.size(withAttributes: [NSAttributedStringKey.font: font])
         let width: CGFloat = size.width + 50
         return CGSize(width: width, height: size.height + 20)
     }
     
-    //MARK:- Find Size
+    // MARK: - Find Size
     func findSizes(collectionView: UICollectionView) {
         for section in 0..<collectionView.numberOfSections {
             for index in 0..<numberOfColumns {
                 let indexPath = IndexPath(item: index, section: section)
                 let titleString = cellTitleAttributes?(indexPath).title ?? ""
                 let font = cellTitleAttributes?(indexPath).font ?? contentFont
-                var size = sizeForString(titleString,font)
+                var size = sizeForString(titleString, font)
                 
-                if itemSizeArray.isEmpty  {
+                if itemSizeArray.isEmpty {
                     itemSizeArray.append(size)
                 } else {
                     if itemSizeArray.count > index {
@@ -203,3 +203,4 @@ extension AssesmentCollecionLayout {
     }
     
 }
+
