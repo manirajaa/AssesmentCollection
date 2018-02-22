@@ -50,8 +50,8 @@ class ViewController: UIViewController {
     }
     
     private func initializeCollection() {
-        collectionView.collectionDelegate = self
-        collectionView.collectionDatasource = self
+        collectionView.tabularDelegate = self
+        collectionView.tabularDatasource = self
         collectionView.reloadData()
     }
     
@@ -62,17 +62,17 @@ class ViewController: UIViewController {
 }
 
 extension ViewController: TabularCollectionDelegate, TabularCollectionDataSource {
-    func tabularView(_ tabularView: TabularCollectionView, titleAttributesForCell indexpath: IndexPath) -> CellTitleAttributes {
-        var font = Font.AvenirMedium.font()
+    func tabularView(_ tabularView: TabularCollectionView, titleAttributesForCellAt indexpath: IndexPath) -> CellTitleAttributes {
+        var font = Font.avenirMedium.font()
         var textAlignment = NSTextAlignment.center
         if indexpath.section == 0 {
-            font = Font.AvenirHeavy.font(size: 18)
+            font = Font.avenirHeavy.font(ofSize: 18)
         }
         if indexpath.row < 2 && indexpath.section != 0 {
             textAlignment = .right
         }
-        let titleAttribute = CellTitleAttributes(title: data[indexpath.section][indexpath.row], font: font, textAlignment: textAlignment)
-        return titleAttribute
+        let text = data[indexpath.section][indexpath.row]
+        return CellTitleAttributes(title: text, font: font, textAlignment: textAlignment, textColor: Color.text.uiColor)
     }
     
     func numberOfColumns(in tabularView: TabularCollectionView) -> Int {
@@ -90,8 +90,19 @@ extension ViewController: TabularCollectionDelegate, TabularCollectionDataSource
             return true
         }
     }
+    func numberOfStaticRows(in tabularView: TabularCollectionView) -> Int {
+        return 1
+    }
+    func numberOfStaticColumn(in tabularView: TabularCollectionView) -> Int {
+        return 1
+    }
     
     //Delegate
     func tabularView(_ tabularView: TabularCollectionView, didSeletItemAt indexPath: IndexPath) { }
+    
+    func tabularView(_ tabularView: TabularCollectionView, shouldHideColumnSeparatorAt indexPath: IndexPath) -> Bool {
+        return indexPath.row != 0
+    }
+
 }
 
