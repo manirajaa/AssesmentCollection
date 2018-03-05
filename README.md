@@ -1,7 +1,9 @@
 # AssesmentCollection
 Collection view which scrolls both horizontal and vertical
 
-![alt text](https://github.com/manirajaa/AssesmentCollection/blob/master/Simulator%20Screen%20Shot%20-%20iPhone%208%20Plus%20-%202018-02-22%20at%2015.06.38.png?raw=true)
+![alt text](https://github.com/manirajaa/AssesmentCollection/blob/master/Simulator%20Screen%20Shot%20-%20iPhone%208%20Plus%20-%202018-03-05%20at%2011.13.56.png?raw=true)
+
+![alt text](https://github.com/manirajaa/AssesmentCollection/blob/master/Simulator%20Screen%20Shot%20-%20iPhone%208%20Plus%20-%202018-03-05%20at%2011.13.54.png?raw=true)
 
 ## Usage
 
