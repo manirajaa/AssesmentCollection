@@ -54,7 +54,7 @@
                             <constraint firstAttribute="height" constant="2" id="Ak4-kD-ZwQ"/>
                         </constraints>
                     </view>
-                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hKw-m3-9qn" customClass="GradientView" customModule="AssesmentTable" customModuleProvider="target">
+                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hKw-m3-9qn">
                         <rect key="frame" x="50" y="0.0" width="2" height="36"/>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>

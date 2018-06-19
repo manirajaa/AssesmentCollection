@@ -100,7 +100,7 @@ extension ViewController: TabularCollectionDataSource {
 
 extension ViewController: TabularCollectionDelegate {
     
-    func tabularView(_ tabularView: TabularCollectionView, didSeletItemAt indexPath: IndexPath) { }
+    private func tabularView(_ tabularView: TabularCollectionView, didSeletItemAt indexPath: IndexPath) { }
     
     func tabularView(_ tabularView: TabularCollectionView, shouldHideColumnSeparatorAt indexPath: IndexPath) -> Bool {
         return indexPath.row != 0

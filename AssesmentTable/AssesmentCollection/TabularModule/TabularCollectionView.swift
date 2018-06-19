@@ -17,7 +17,8 @@ struct CellTitleAttributes {
 
 // MARK: DELEGATE
 protocol TabularCollectionDelegate: class {
-
+    func tabularView(_ tabularView: TabularCollectionView, shouldHideRowSeparatorAt indexPath: IndexPath) -> Bool
+    func tabularView(_ tabularView: TabularCollectionView, shouldHideColumnSeparatorAt indexPath: IndexPath) -> Bool
     func tabularView(_ tabularView: TabularCollectionView, didSelectItemAt indexPath: IndexPath)
 }
 
