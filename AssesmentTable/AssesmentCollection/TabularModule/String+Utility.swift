@@ -12,7 +12,7 @@ extension String {
     // To find the size of the String
     func size(withConstrainedWidth width: CGFloat = .greatestFiniteMagnitude, height: CGFloat = .greatestFiniteMagnitude, font: UIFont) -> CGSize {
         let constraintSize = CGSize(width: width, height: height)
-        return self.boundingRect(with: constraintSize, options: .usesLineFragmentOrigin, attributes: [NSAttributedStringKey.font: font], context: nil).size
+        return self.boundingRect(with: constraintSize, options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: font], context: nil).size
     }
     
 }
